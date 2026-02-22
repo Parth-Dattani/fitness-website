@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About dattanipd — sustainable health and fitness coaching. Learn how we build lasting habits instead of short-term programs.">
+    <title>About | dattanipd</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+</head>
+
+<script>
+    // Right Click Disable
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // Keyboard Shortcuts (F12, Ctrl+Shift+I, Ctrl+U)Block
+    document.onkeydown = function(e) {
+        // F12 key
+        if(e.keyCode == 123) {
+            return false;
+        }
+        // Ctrl+Shift+I (Inspect)
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+            return false;
+        }
+        // Ctrl+Shift+J (Console)
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+            return false;
+        }
+        // Ctrl+U (View Source)
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+            return false;
+        }
+    };
+</script>
+
+<body class="bg-white font-sans" x-data="{ showAppModal: false }">
+
+    <div x-data x-html="fetch('nav.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+
+    <div x-data x-html="fetch('modal.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+
+    <main class="min-h-[80vh] flex flex-col md:flex-row bg-white pt-20" role="main">
+        <div class="md:w-1/2 p-10 md:p-24 flex flex-col justify-center text-left">
+            <h1 class="text-6xl font-bold mb-10 text-black text-left">dattani pd</h1>
+            <div class="space-y-6 text-gray-700 text-lg leading-relaxed text-left">
+                <p>When it comes to health and fitness, I believe in sustainability over all else! Sure, there are great "12-week programs, 1-month challenges, 90-day transformations", but at the end of the day, when you finish that, what's next?</p>
+                <p>Another 12-week program? When working with clients, I like to build from the ground up. Instead of handing you a meal plan, I teach you how to build your own.</p>
+            </div>
+            <a href="home.html" class="mt-12 text-gray-400 hover:text-black transition flex items-center gap-2 w-fit focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded px-1 -mx-1" aria-label="Back to home page">
+                <span aria-hidden="true">←</span> Back to Home
+            </a>
+        </div>
+        
+        <div class="md:w-1/2 bg-[#232326] min-h-[400px] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77" 
+                 alt="Fitness motivation — sustainable health and training" 
+                 loading="lazy"
+                 class="w-full h-full object-cover opacity-90 transition-transform duration-700 hover:scale-110">
+        </div>
+    </main>
+
+    <div x-data x-html="fetch('footer.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+
+</body>
+</html>

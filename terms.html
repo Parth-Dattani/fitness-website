@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terms of Use for dattanipd fitness coaching and services.">
+    <title>Terms of Use | dattanipd</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+</head>
+<script>
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    };
+</script>
+<body class="bg-white font-sans" x-data="{ showAppModal: false }">
+
+    <div x-data x-html="fetch('nav.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+    <div x-data x-html="fetch('modal.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+
+    <main class="min-h-[80vh] pt-24 pb-16 px-6 md:px-24" role="main">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 text-black uppercase tracking-tight">Terms of Use</h1>
+            <p class="text-gray-500 text-sm mb-12">Last updated: February 2026</p>
+
+            <div class="prose prose-gray max-w-none space-y-10 text-gray-700 leading-relaxed">
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">1. Acceptance of Terms</h2>
+                    <p>By accessing or using the dattanipd website and any related coaching, programs, or services (“Services”), you agree to be bound by these Terms of Use. If you do not agree, please do not use our Services.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">2. Use of Service</h2>
+                    <p>Our Services are intended for personal, non-commercial use. You may use the website and purchased programs for your own health and fitness goals. You may not resell, redistribute, or share program materials with third parties without written permission.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">3. Health Disclaimer</h2>
+                    <p>Fitness and nutrition advice provided through dattanipd is for general informational purposes. It is not a substitute for professional medical advice. Consult your doctor or healthcare provider before starting any new diet or exercise program, especially if you have existing health conditions.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">4. User Responsibilities</h2>
+                    <p>You are responsible for providing accurate information when signing up or purchasing. You agree to use the Services in a lawful manner and not to harass, abuse, or harm others. We reserve the right to suspend or terminate access for violation of these terms.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">5. Intellectual Property</h2>
+                    <p>All content on this site—including text, images, workout plans, and materials—is owned by dattanipd and protected by copyright. You may not copy, modify, or distribute our content without prior written consent.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">6. Limitation of Liability</h2>
+                    <p>To the fullest extent permitted by law, dattanipd shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Services. Our total liability is limited to the amount you paid for the relevant service.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">7. Changes</h2>
+                    <p>We may update these Terms of Use from time to time. The “Last updated” date at the top will reflect changes. Continued use of the Services after changes constitutes acceptance of the revised terms.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">8. Contact</h2>
+                    <p>For questions about these Terms of Use, contact us at <a href="contact.html" class="text-black font-medium underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded">Contact</a> or via the email provided on the Contact page.</p>
+                </section>
+            </div>
+
+            <a href="home.html" class="mt-12 inline-flex items-center gap-2 text-gray-400 hover:text-black transition w-fit focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded px-1 -mx-1" aria-label="Back to home">
+                <span aria-hidden="true">←</span> Back to Home
+            </a>
+        </div>
+    </main>
+
+    <div x-data x-html="fetch('footer.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+</body>
+</html>

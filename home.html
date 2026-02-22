@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Life | dattanipd</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+</head>
+<script>
+    // Right Click Disable
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // Keyboard Shortcuts (F12, Ctrl+Shift+I, Ctrl+U)Block
+    document.onkeydown = function(e) {
+        // F12 key
+        if(e.keyCode == 123) {
+            return false;
+        }
+        // Ctrl+Shift+I (Inspect)
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+            return false;
+        }
+        // Ctrl+Shift+J (Console)
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+            return false;
+        }
+        // Ctrl+U (View Source)
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+            return false;
+        }
+    };
+</script>
+<body class="bg-gray-50 font-sans" x-data="{ 
+    activeSlide: 0,
+    showAppModal: false,
+    plans: [
+        {
+            title: '21 days Kickstarter',
+            desc: 'This 21 days program is designed to kick start your health journey using a simple nutritious diet plan and basic exercise...',
+            features: ['Video demonstrations & instructions', 'Regular progress check-ins', 'Daily workout logging', '24/7 chat support'],
+            price: '$40',
+            duration: 'for 3 weeks',
+            img: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438'
+        },
+        {
+            title: 'Get Shredded',
+            desc: 'A gym based program to help you lose weight and body fat whilst gaining muscle tone and strength...',
+            features: ['Personalised fitness plan', 'Personalised meal plan & recipes', 'Regular progress check-ins'],
+            price: '$120',
+            duration: 'for 8 weeks',
+            img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48'
+        },
+        {
+            title: 'One on One Personal Training',
+            desc: 'My most comprehensive program where we work together to help you reach your physique goals...',
+            features: ['One on one coaching', 'Weekly 1-1 video calls', 'Custom fitness plan'],
+            price: 'Starts $80',
+            duration: 'Monthly',
+            img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b'
+        }
+    ]
+}">
+
+   <div x-data x-html="fetch('nav.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+
+    <div x-data x-html="fetch('modal.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+
+    <header class="relative h-screen min-h-[400px] flex items-center justify-center text-center text-white bg-black">
+        <div class="absolute inset-0 bg-black/60 z-10"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48')] bg-cover bg-center opacity-80"></div>
+        <div class="relative z-20 px-4 max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 italic leading-tight uppercase">Fall in love with fitness first.</h1>
+            <p class="text-lg md:text-xl mb-10 opacity-90 italic">Meet the stronger, faster, and more confident version of yourself.</p>
+            <button type="button" @click="document.getElementById('plans-slider').scrollIntoView({behavior: 'smooth'})" class="bg-white text-black px-12 py-3 rounded-full font-bold shadow-lg uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white focus:ring-offset-black" aria-label="Scroll to plans">Get Started</button>
+        </div>
+    </header>
+
+    <section id="plans-slider" class="py-24 px-6 max-w-6xl mx-auto" aria-roledescription="carousel" aria-label="Fitness plans">
+        <h2 class="text-4xl font-bold mb-12 text-black text-left">My Plans</h2>
+        <div class="relative bg-white rounded-[2.5rem] shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100 min-h-[480px]">
+            <div class="md:w-1/2 overflow-hidden"><img :src="plans[activeSlide].img" :alt="plans[activeSlide].title" loading="lazy" class="w-full h-full object-cover transition-all duration-500"></div>
+            <div class="md:w-1/2 p-10 md:p-14 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6 text-black text-left uppercase" x-text="plans[activeSlide].title"></h3>
+                    <p class="text-gray-500 text-lg mb-8 leading-relaxed text-left" x-text="plans[activeSlide].desc"></p>
+                    <ul class="space-y-4 mb-8">
+                        <template x-for="feature in plans[activeSlide].features">
+                            <li class="flex items-start gap-3 text-sm text-gray-700 text-left">
+                                <span class="text-orange-500 font-bold">✓</span> <span x-text="feature"></span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+                <div class="flex justify-between items-center text-2xl font-bold text-black border-t pt-8">
+                    <div><span x-text="plans[activeSlide].price"></span> <span class="text-sm font-normal text-gray-400 ml-1" x-text="plans[activeSlide].duration"></span></div>
+                    <a href="plans.html" class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="View plan details">→</a>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-between mt-10 px-4">
+            <div class="flex gap-2" role="tablist" aria-label="Plan slides">
+                <template x-for="(plan, index) in plans">
+                    <button type="button" @click="activeSlide = index" :class="activeSlide === index ? 'bg-black w-8' : 'bg-gray-300 w-2'" class="h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2" :aria-label="'Go to plan ' + (index + 1)" :aria-current="activeSlide === index ? 'true' : 'false'"></button>
+                </template>
+            </div>
+            <div class="flex gap-4">
+                <button type="button" @click="activeSlide = (activeSlide === 0) ? plans.length - 1 : activeSlide - 1" class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2" aria-label="Previous plan">←</button>
+                <button type="button" @click="activeSlide = (activeSlide === plans.length - 1) ? 0 : activeSlide + 1" class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2" aria-label="Next plan">→</button>
+            </div>
+        </div>
+        <div class="flex justify-center mt-12">
+            <a href="plans.html" class="bg-black text-white px-14 py-4 rounded-full font-bold text-lg shadow-xl hover:scale-105 transition inline-block uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black focus:ring-white">Explore All Plans</a>
+        </div>
+    </section>
+
+    <section class="bg-[#111111] text-white py-24 px-6 md:px-24">
+        <div class="max-w-4xl text-left">
+            <h2 class="text-4xl font-bold mb-8 italic tracking-tight">dattanipd</h2>
+            <p class="text-gray-300 text-lg mb-8 leading-relaxed">  When it comes to health and fitness, I believe in sustainability over all else! Sure, there are great "12-week programs", 1-month challenges, 90-day transformations", but by the end of the day, when you finish that, what's next?</p>
+            <p class="text-gray-300 text-lg mb-10 leading-relaxed"> Another 12-week program? When working with clients, I like to build from the ground up. Instead of handing you a meal plan, I teach you how to build your own.</p>
+            <a href="about.html" class="text-white font-bold border-b border-white pb-1 flex items-center gap-2 uppercase tracking-widest text-sm hover:gap-4 transition-all inline-block focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#111111]">KNOW MORE <span>→</span></a>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-20 text-center text-black uppercase tracking-tight">Complete personalised fitness solution</h2>
+        <div class="grid md:grid-cols-3 gap-y-20 gap-x-12">
+            <div class="flex flex-col items-start text-left"><div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">📹</div><h3 class="text-xl font-bold mb-4 text-black">One-to-one Video Calls</h3><p class="text-gray-500 text-sm">Connect with me over one-to-one video calls to discuss your goals, progress, techniques and more.</p></div>
+            <div class="flex flex-col items-start text-left"><div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">📊</div><h3 class="text-xl font-bold mb-4 text-black">Compliance Tracking</h3><p class="text-gray-500 text-sm">Build long term healthy habits with weekly and monthly compliance trends for workouts, nutrition and everything else.</p></div>
+            <div class="flex flex-col items-start text-left"><div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">⌚</div><h3 class="text-xl font-bold mb-4 text-black">Wearable Integration</h3><p class="text-gray-500 text-sm">Connect your wearable device with the app to track your daily activity levels and workout metrics.</p></div>
+            <div class="flex flex-col items-start text-left"><div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">📅</div><h3 class="text-xl font-bold mb-4 text-black">Weekly Check-ins</h3><p class="text-gray-500 text-sm">Check-in with weekly photos and measurements to keep track of your progress. Make amends whenever required.</p></div>
+            <div class="flex flex-col items-start text-left"><div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">🏋️</div><h3 class="text-xl font-bold mb-4 text-black">Personalised Workouts</h3><p class="text-gray-500 text-sm">Get frequent tweaks on your workout plan based on your heart rate, feedback and of course, your schedule.</p></div>
+            <div class="flex flex-col items-start text-left"><div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">🍎</div><h3 class="text-xl font-bold mb-4 text-black">Customised Nutrition</h3><p class="text-gray-500 text-sm">Get meal plans based on your dietary preferences. I will constantly update your plan to ensure you get to eat what you like.</p></div>
+        </div>
+        <div class="flex justify-center mt-20"><a href="plans.html" class="bg-black text-white px-16 py-4 rounded-full font-bold text-lg hover:scale-105 transition shadow-xl uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black focus:ring-white">Get Started</a></div>
+    </section>
+
+    <div x-data x-html="fetch('footer.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+
+</body>
+</html>

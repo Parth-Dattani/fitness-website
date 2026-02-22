@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dattanipd | Fitness Life</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans" x-data="{ 
+    currentPage: 'home', 
+    activeSlide: 1,
+    plans: [
+        {
+            title: '21 days Kickstarter',
+            desc: 'This 21 days program is designed to kick start your health journey using a simple nutritious diet plan and basic exercise...',
+            features: ['Video demonstrations & instructions', 'Regular progress check-ins', 'Daily workout logging', '24/7 chat support'],
+            price: '$40',
+            duration: 'for 3 weeks',
+            img: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438'
+        },
+        {
+            title: 'Get Shredded',
+            desc: 'A gym based program to help you lose weight and body fat whilst gaining muscle tone and strength...',
+            features: ['Personalised fitness plan', 'Personalised meal plan & recipes', 'Regular progress check-ins'],
+            price: '$120',
+            duration: 'for 8 weeks',
+            img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48'
+        },
+        {
+            title: 'One on One Personal Training',
+            desc: 'My most comprehensive program where we work together to help you reach your physique goals...',
+            features: ['One on one coaching', 'Weekly 1-1 video calls', 'Custom fitness plan'],
+            price: 'Starts $80',
+            duration: 'Monthly',
+            img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b'
+        }
+    ]
+}">
+
+    <nav class="flex justify-between items-center p-6 bg-white sticky top-0 z-50 shadow-sm">
+        <div class="text-xl font-bold text-gray-800 cursor-pointer" @click="currentPage = 'home'; window.scrollTo(0,0)">dattanipd</div>
+        <div class="hidden md:flex space-x-8 text-gray-600 font-medium">
+            <a href="#" @click.prevent="currentPage = 'home'" :class="currentPage === 'home' ? 'text-black border-b-2 border-black' : ''">Home</a>
+            <a href="#" @click.prevent="currentPage = 'about'" :class="currentPage === 'about' ? 'text-black border-b-2 border-black' : ''">About</a>
+            <a href="#" @click.prevent="currentPage = 'all-plans'" :class="currentPage === 'all-plans' ? 'text-black border-b-2 border-black' : ''">Plans</a>
+            <a href="#" class="hover:text-black transition">App</a>
+        </div>
+        <div class="md:hidden text-2xl">☰</div>
+    </nav>
+
+    <main x-show="currentPage === 'home'" x-transition.opacity.duration.400ms>
+        
+        <header class="relative h-[70vh] flex items-center justify-center text-center text-white bg-black">
+            <div class="absolute inset-0 bg-black/50 z-10"></div>
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48')] bg-cover bg-center opacity-80"></div>
+            <div class="relative z-20 px-4 max-w-3xl">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Fall in love with fitness</h1>
+                <p class="text-lg md:text-xl mb-10 opacity-90 font-light italic">Meet the stronger, faster, and more confident version of yourself.</p>
+                <button @click="document.getElementById('plans-slider').scrollIntoView({behavior: 'smooth'})" class="bg-white text-black px-12 py-4 rounded-full font-bold hover:scale-105 transition shadow-lg">Get Started</button>
+            </div>
+        </header>
+
+        <section id="plans-slider" class="py-24 px-6 max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12">My Plans</h2>
+            <div class="relative bg-white rounded-[2.5rem] shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100 min-h-[500px]">
+                <div class="md:w-1/2 overflow-hidden">
+                    <img :src="plans[activeSlide-1].img" class="w-full h-full object-cover transition-all duration-700">
+                </div>
+                <div class="md:w-1/2 p-10 md:p-16 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-6" x-text="plans[activeSlide-1].title"></h3>
+                        <p class="text-gray-500 text-lg mb-8 leading-relaxed" x-text="plans[activeSlide-1].desc"></p>
+                        <ul class="space-y-4">
+                            <template x-for="feature in plans[activeSlide-1].features">
+                                <li class="flex items-start gap-4">
+                                    <span class="text-orange-500 font-bold">✓</span> <span class="text-gray-700 font-medium" x-text="feature"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    <div class="mt-12 pt-8 border-t border-gray-100 flex justify-between items-center">
+                        <div class="text-2xl font-bold">
+                            <span x-text="plans[activeSlide-1].price"></span> 
+                            <span class="text-sm font-normal text-gray-400 ml-1" x-text="plans[activeSlide-1].duration"></span>
+                        </div>
+                        <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-sm">
+                            <span class="text-xl">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-10">
+                <div class="flex gap-2">
+                    <template x-for="i in plans.length">
+                        <button @click="activeSlide = i" :class="activeSlide === i ? 'bg-black w-8' : 'bg-gray-300 w-2'" class="h-2 rounded-full transition-all duration-300"></button>
+                    </template>
+                </div>
+                <div class="flex gap-4">
+                    <button @click="activeSlide = activeSlide > 1 ? activeSlide - 1 : plans.length" class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition">←</button>
+                    <button @click="activeSlide = activeSlide < plans.length ? activeSlide + 1 : 1" class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition">→</button>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-16">
+                <button @click="currentPage = 'all-plans'; window.scrollTo(0,0)" class="bg-black text-white px-14 py-4 rounded-full font-bold text-lg hover:scale-105 transition shadow-xl">Explore All Plans</button>
+            </div>
+        </section>
+
+        <section class="bg-[#151517] text-white py-24 px-6 md:px-24">
+            <div class="max-w-4xl">
+                <h2 class="text-4xl font-bold mb-8 italic tracking-tight">dattanipd</h2>
+                <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                    When it comes to health and fitness, I believe in sustainability over all else! Sure, there are great "12-week programs", 1-month challenges, 90-day transformations", but by the end of the day, when you finish that, what's next?
+                </p>
+                <br/>
+                <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                    Another 12-week program? When working with clients, I like to build from the ground up. Instead of handing you a meal plan, I teach you how to build your own.
+                </p>
+                <button @click="currentPage = 'about'; window.scrollTo(0,0)" class="text-white font-bold border-b border-white pb-1 flex items-center gap-2 hover:gap-4 transition-all uppercase tracking-widest text-sm">
+                    Know more <span>→</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="py-24 px-6 max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-20 text-center md:text-left">Complete personalised fitness solution</h2>
+            <div class="grid md:grid-cols-3 gap-y-20 gap-x-12">
+                <div class="flex flex-col items-start">
+                    <div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">📹</div>
+                    <h3 class="text-xl font-bold mb-4">One-to-one Video Calls</h3>
+                    <p class="text-gray-500 leading-relaxed">Connect with me over one-to-one video calls to discuss your goals, progress, techniques and more.</p>
+                </div>
+                <div class="flex flex-col items-start">
+                    <div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">🥧</div>
+                    <h3 class="text-xl font-bold mb-4">Compliance Tracking</h3>
+                    <p class="text-gray-500 leading-relaxed">Build long term healthy habits with weekly and monthly compliance trends for workouts, nutrition and everything else.</p>
+                </div>
+                <div class="flex flex-col items-start">
+                    <div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">⌚</div>
+                    <h3 class="text-xl font-bold mb-4">Wearable Integration</h3>
+                    <p class="text-gray-500 leading-relaxed">Connect your wearable device with the app to track your daily activity levels and workout metrics.</p>
+                </div>
+                <div class="flex flex-col items-start">
+                    <div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">📅</div>
+                    <h3 class="text-xl font-bold mb-4">Weekly Check-ins</h3>
+                    <p class="text-gray-500 leading-relaxed">Check-in with weekly photos and measurements to keep track of your progress. Make amends whenever required.</p>
+                </div>
+                <div class="flex flex-col items-start">
+                    <div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">🏋️</div>
+                    <h3 class="text-xl font-bold mb-4">Personalised Workouts</h3>
+                    <p class="text-gray-500 leading-relaxed">Get frequent tweaks on your workout plan based on your heart rate, feedback and of course, your schedule.</p>
+                </div>
+                <div class="flex flex-col items-start">
+                    <div class="w-16 h-16 mb-6 flex items-center justify-center bg-orange-50 rounded-full text-3xl">🍎</div>
+                    <h3 class="text-xl font-bold mb-4">Customised Nutrition</h3>
+                    <p class="text-gray-500 leading-relaxed">Get meal plans based on your dietary preferences. I will constantly update your plan to ensure you get to eat what you like.</p>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-20">
+                <button @click="currentPage = 'all-plans'; window.scrollTo(0,0)" class="bg-black text-white px-16 py-4 rounded-full font-bold text-lg hover:scale-105 transition shadow-xl">Get Started</button>
+            </div>
+        </section>
+    </main>
+
+    <main x-show="currentPage === 'about'" x-transition.opacity.duration.400ms class="min-h-screen flex flex-col md:flex-row bg-white">
+        <div class="md:w-1/2 p-10 md:p-24 flex flex-col justify-center">
+            <h2 class="text-5xl font-bold mb-10">dattanipd</h2>
+            <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                When it comes to health and fitness, I believe in sustainability over all else! I believe that building habits is more important than short-term goals.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed mb-10">
+                I like to build from the ground up. Instead of handing you a meal plan, I teach you how to build your own.
+            </p>
+            <button @click="currentPage = 'home'" class="text-gray-400 hover:text-black transition w-max">← Back to Home</button>
+        </div>
+        <div class="md:w-1/2 bg-[#1a1a1c]"></div>
+    </main>
+
+    <main x-show="currentPage === 'all-plans'" x-transition.opacity.duration.400ms class="py-16 px-6 max-w-5xl mx-auto">
+        <h2 class="text-5xl font-bold mb-16">My Plans</h2>
+        <div class="space-y-12">
+            <template x-for="plan in plans">
+                <div class="bg-white rounded-[2.5rem] shadow-md hover:shadow-xl transition-all border border-gray-100 flex flex-col md:flex-row overflow-hidden">
+                    <div class="md:w-2/5 h-64 md:h-auto"><img :src="plan.img" class="w-full h-full object-cover"></div>
+                    <div class="md:w-3/5 p-10 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-4" x-text="plan.title"></h3>
+                            <p class="text-gray-500 mb-6" x-text="plan.desc"></p>
+                            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                                <template x-for="feature in plan.features">
+                                    <li class="flex items-center gap-3 text-sm text-gray-700">
+                                        <span class="text-orange-500 font-bold">✓</span> <span x-text="feature"></span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                        <div class="flex justify-between items-center border-t pt-6">
+                            <div class="text-xl font-bold"><span x-text="plan.price"></span> <span class="text-sm font-normal text-gray-400" x-text="plan.duration"></span></div>
+                            <button class="text-orange-500 font-bold hover:underline">Subscribe Now →</button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </main>
+
+    <footer class="bg-black text-white py-16 px-6 border-t border-gray-900 mt-20">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <div class="mb-4 md:mb-0">
+                <p class="text-lg font-bold text-gray-300 mb-2 italic">dattanipd</p>
+                <p>© 2026 dattanipd. All Rights Reserved.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6">
+                <p class="hover:text-white transition">Contact: +91 9512359792</p>
+                <p class="hover:text-white transition">dattaniparth2@gmail.com</p>
+                <a href="#" class="hover:text-white transition">Terms of Use</a>
+                <a href="#" class="hover:text-white transition">Privacy policy</a>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-8 text-center text-[10px] text-gray-700 uppercase tracking-[0.2em]">
+            Developed by PixelPerfect Apps
+        </div>
+    </footer>
+</body>
+</html>

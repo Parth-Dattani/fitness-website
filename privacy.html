@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy for dattanipd — how we collect, use and protect your data.">
+    <title>Privacy Policy | dattanipd</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.13.3/dist/cdn.min.js"></script>
+</head>
+<script>
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    };
+</script>
+<body class="bg-white font-sans" x-data="{ showAppModal: false }">
+
+    <div x-data x-html="fetch('nav.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+    <div x-data x-html="fetch('modal.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+
+    <main class="min-h-[80vh] pt-24 pb-16 px-6 md:px-24" role="main">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 text-black uppercase tracking-tight">Privacy Policy</h1>
+            <p class="text-gray-500 text-sm mb-12">Last updated: February 2026</p>
+
+            <div class="prose prose-gray max-w-none space-y-10 text-gray-700 leading-relaxed">
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">1. Introduction</h2>
+                    <p>dattanipd (“we”, “our”) respects your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website and coaching services.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">2. Information We Collect</h2>
+                    <p>We may collect information you provide directly, such as name, email address, phone number, and payment details when you sign up, contact us, or purchase a plan. We may also collect usage data (e.g. pages visited, device type) when you browse our website.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">3. How We Use Your Information</h2>
+                    <p>We use your information to deliver coaching services, process payments, send program materials, respond to inquiries, and improve our website and offerings. We may send occasional updates or offers if you have opted in; you can unsubscribe at any time.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">4. Cookies and Similar Technologies</h2>
+                    <p>Our website may use cookies and similar technologies to improve your experience (e.g. remembering preferences, understanding how the site is used). You can adjust your browser settings to limit or block cookies.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">5. Data Sharing</h2>
+                    <p>We do not sell your personal information. We may share data with trusted service providers (e.g. payment processors, email services) only as needed to operate our business. We may disclose information if required by law.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">6. Data Security</h2>
+                    <p>We take reasonable steps to protect your data using industry-standard measures. No method of transmission over the internet is 100% secure; we cannot guarantee absolute security.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">7. Your Rights</h2>
+                    <p>Depending on your location, you may have the right to access, correct, or delete your personal data, or to object to certain processing. To exercise these rights or ask questions, contact us via the <a href="contact.html" class="text-black font-medium underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded">Contact</a> page.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">8. Changes to This Policy</h2>
+                    <p>We may update this Privacy Policy from time to time. The “Last updated” date at the top will reflect changes. We encourage you to review this page periodically.</p>
+                </section>
+                <section>
+                    <h2 class="text-xl font-bold text-black mb-3">9. Contact</h2>
+                    <p>For privacy-related questions or requests, contact us at <a href="contact.html" class="text-black font-medium underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded">Contact</a>.</p>
+                </section>
+            </div>
+
+            <a href="home.html" class="mt-12 inline-flex items-center gap-2 text-gray-400 hover:text-black transition w-fit focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded px-1 -mx-1" aria-label="Back to home">
+                <span aria-hidden="true">←</span> Back to Home
+            </a>
+        </div>
+    </main>
+
+    <div x-data x-html="fetch('footer.html').then(res => res.text()).then(data => $el.innerHTML = data)"></div>
+</body>
+</html>

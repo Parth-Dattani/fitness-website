@@ -1,0 +1,14 @@
+<nav class="flex justify-between items-center p-6 bg-white fixed inset-x-0 top-0 z-50 shadow-sm" 
+     x-data="{ activePage: window.location.pathname.split('/').pop() || 'home.html' }">
+    
+    <div class="text-xl font-bold uppercase tracking-tight text-gray-800 cursor-pointer" onclick="window.location.href='home.html'">
+        dattanipd
+    </div>
+
+    <div class="hidden md:flex space-x-8 text-gray-600 font-medium items-center">
+        <a href="home.html" :class="activePage === 'home.html' ? 'text-black border-b-2 border-black' : 'hover:text-black transition'" class="pb-1">Home</a>
+        <a href="about.html" :class="activePage === 'about.html' ? 'text-black border-b-2 border-black' : 'hover:text-black transition'" class="pb-1">About</a>
+        <a href="plans.html" :class="activePage === 'plans.html' ? 'text-black border-b-2 border-black' : 'hover:text-black transition'" class="pb-1">Plans</a>
+        <a href="#" @click.prevent="showAppModal = true" class="hover:text-black transition cursor-pointer pb-1">App</a>
+    </div>
+</nav>
